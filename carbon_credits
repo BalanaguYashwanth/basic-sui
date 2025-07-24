@@ -1,0 +1,29 @@
+module carbon_credits::carbon_credits;
+
+use std::string;
+
+public struct Company has key{
+    id: UID,
+    name: string::String,
+    credits: string::String,
+}
+
+public entry fun create_company(
+    name: vector<u8>,
+    credits: vector<u8>,
+    ctx: &mut TxContext
+) {
+    let company = Company{
+        id: object::new(ctx),
+        name: string::utf8(name),
+        credits: string::utf8(credits),
+    };
+    transfer::share_object(company);
+}
+
+public entry fun update_company_credits(
+    company: &mut Company,
+    new_credits:vector<u8>,
+){
+    company.credits = string::utf8(new_credits)
+}
