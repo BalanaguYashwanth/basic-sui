@@ -27,3 +27,9 @@ public entry fun update_company_credits(
 ){
     company.credits = string::utf8(new_credits)
 }
+
+public entry fun get_company(
+    company: &mut Company,
+):(string::String, string::String){
+    (company.name, company.credits)
+}
